@@ -31,10 +31,10 @@ class StdOutListener(StreamListener):
 
 if __name__ == '__main__':
     global q
-    q = qconnection.QConnection(host='localhost', port=6500)
+    q = qconnection.QConnection(host=sys.argv[1], port=int(sys.argv[2]))
     q.open()
     l = StdOutListener()
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
-    stream.filter(track=sys.argv[1:])
+    stream.filter(track=sys.argv[3:])
